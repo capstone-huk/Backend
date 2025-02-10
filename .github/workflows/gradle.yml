@@ -52,8 +52,8 @@ jobs:
                     echo "${{ secrets.ENV_VARS }}" | sudo tee .env > /dev/null
                     cat .env
                     source .env
-            ## docker-compose.yaml 파일을 생성합니다.
-                    sudo touch docker-compose.yaml
+            ## docker-compose.yml 파일을 생성합니다.
+                    sudo touch docker-compose.yml
                     echo -e "${{ secrets.DOCKER_COMPOSE }}" | sudo tee docker-compose.yml > /dev/null
             
             ## docker-compose를 실행합니다.
