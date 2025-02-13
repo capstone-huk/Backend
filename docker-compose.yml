@@ -1,12 +1,40 @@
 version: '3.8'
 
 services:
+  database:
+    container_name: mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${RDS_DB_PASSWORD}
+      MYSQL_DATABASE: huk
+      TZ: 'Asia/Seoul'
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - 3306:3306
+    restart: always
+    networks:
+      - network
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -p$$RDS_DB_PASSWORD --silent" ]
+      interval: 30s
+      retries: 5
+
   web:
-    container_name: -server
+    container_name: vote
     build:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      database:
+        condition: service_healthy
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: ${RDS_DB_HOST}
+      SPRING_DATASOURCE_PASSWORD: ${RDS_DB_PASSWORD}
+
     restart: always
     volumes:
       - app:/app

@@ -60,5 +60,4 @@ jobs:
                     sudo chmod 666 /var/run/docker.sock
                     sudo docker rm -f $(docker ps -qa)
                     sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-                    docker-compose -f docker-compose.yml --env-file ./.env up -d
-                    docker image prune -f
+                    docker run -d --name huk -p 8080:8080 --env-file ./.env ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
