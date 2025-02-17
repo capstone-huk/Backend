@@ -26,12 +26,12 @@ public class JwtTokenProvider {
         this.userDetailsService = userDetailsService;
     }
 
-    public String createToken(String username) {
+    public String createToken(Long id) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expirationMs);
 
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(String.valueOf(id))
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
@@ -47,13 +47,13 @@ public class JwtTokenProvider {
         }
     }
 
-    public String getUsernameFromToken(String token) {
+    public String getIdFromToken(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
     public Authentication getAuthentication(String token) {
-        String username = getUsernameFromToken(token);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        String id = getIdFromToken(token);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(id);
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 }
