@@ -20,7 +20,7 @@ public class ReviewImage extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @Column(name = "review_id", nullable = false)
+    @JoinColumn(name = "review_id", nullable = false)
     private Review review;
 
     @Column(nullable = false)
