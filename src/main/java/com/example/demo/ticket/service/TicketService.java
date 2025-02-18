@@ -32,6 +32,7 @@ public class TicketService {
         return TicketListResponseDto.from(tickets);
     }
 
+    @Transactional
     public TicketResponseDto addTicket(
             CustomUserDetails userDetails,
             Long reviewId,
