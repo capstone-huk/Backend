@@ -1,4 +1,4 @@
-package com.example.demo.user.entity;
+package com.example.demo.review.entity;
 
 import com.example.demo.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -12,22 +12,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "user")
-public class User extends BaseTimeEntity {
+@Table(name = "review_image")
+public class ReviewImage extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "review_image_id")
     private Long id;
 
-    @Column(nullable = false)
-    private String password;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Column(name = "review_id", nullable = false)
+    private Review review;
 
     @Column(nullable = false)
-    private String username;
-
-    @Column(nullable = false)
-    private String profileImage;
-
-    @Column(nullable = false)
-    private String email;
+    private String imageUrl;
 }
