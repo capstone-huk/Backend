@@ -1,6 +1,7 @@
 package com.example.demo.ticket.controller;
 
 import com.example.demo.ticket.dto.TicketListResponseDto;
+import com.example.demo.ticket.service.TicketService;
 import com.example.demo.user.entity.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
