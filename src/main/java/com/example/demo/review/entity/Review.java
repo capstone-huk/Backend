@@ -37,5 +37,7 @@ public class Review extends BaseTimeEntity {
     @Column(nullable = true)
     private String body;
 
-
+    public void setBody(String body) {
+        this.body = body;
+    }
 }
