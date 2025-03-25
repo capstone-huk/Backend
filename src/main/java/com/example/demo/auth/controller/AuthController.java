@@ -26,7 +26,7 @@ public class AuthController {
 
     @GetMapping("/kakao/callback")
     public ResponseEntity<?> callback(@RequestParam("code") String code) throws IOException {
-        String accessToken = kakaoService.getKakaoAccessToken(code);
+        String accessToken = kakaoService.getKakaoAccessToken2(code);
 
         KakaoUserInfoResponseDto userInfo = kakaoService.getUserInfo(accessToken);
 
