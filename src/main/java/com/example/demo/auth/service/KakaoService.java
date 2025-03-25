@@ -37,7 +37,7 @@ public class KakaoService {
                         .queryParam("grant_type", "authorization_code")
                         .queryParam("client_id", clientId)
                         .queryParam("code", code)
-                        .queryParam("redirect_uri", "http://localhost:8080/auth/kakao/callback") // 나중에 프론트로 바꿔주기
+                        .queryParam("redirect_uri", "http://localhost:8080/auth/kakao/callback/") // 나중에 프론트로 바꿔주기
                         .build(true))
                 .header(HttpHeaders.CONTENT_TYPE, HttpHeaderValues.APPLICATION_X_WWW_FORM_URLENCODED.toString())
                 .retrieve()
