@@ -6,6 +6,7 @@ import com.example.demo.review.entity.Review;
 import com.example.demo.review.repository.ReviewRepository;
 import com.example.demo.s3.service.S3Service;
 import com.example.demo.ticket.dto.TicketListResponseDto;
+import com.example.demo.ticket.dto.TicketRequestDto;
 import com.example.demo.ticket.dto.TicketResponseDto;
 import com.example.demo.ticket.entity.Ticket;
 import com.example.demo.ticket.repository.TicketRepository;
@@ -35,12 +36,11 @@ public class TicketService {
     @Transactional
     public TicketResponseDto addTicket(
             CustomUserDetails userDetails,
-            Long reviewId,
-            String ticketImage
+            TicketRequestDto ticketRequestDto
     ) throws IOException {
-        String ticketImageUrl = ticketImage; //s3Service.saveFile(ticketImage);
+        String ticketImageUrl = ticketRequestDto.getTicketImage(); //s3Service.saveFile(ticketImage);
 
-        Review review = reviewRepository.findById(reviewId).orElseThrow(
+        Review review = reviewRepository.findById(ticketRequestDto.getReviewId()).orElseThrow(
                 () -> new NotFoundException(ExceptionCode.NOT_FOUND_REVIEW)
         );
 

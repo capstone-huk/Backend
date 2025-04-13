@@ -1,6 +1,7 @@
 package com.example.demo.ticket.controller;
 
 import com.example.demo.ticket.dto.TicketListResponseDto;
+import com.example.demo.ticket.dto.TicketRequestDto;
 import com.example.demo.ticket.dto.TicketResponseDto;
 import com.example.demo.ticket.service.TicketService;
 import com.example.demo.user.entity.CustomUserDetails;
@@ -30,16 +31,14 @@ public class TicketController {
         return ResponseEntity.ok().body(ticketList);
     }
 
-    @PostMapping(path = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "")
     public ResponseEntity<TicketResponseDto> ticketAdd(
             @AuthenticationPrincipal CustomUserDetails userDetails,
-            @RequestParam Long reviewId,
-            @RequestParam String ticketImage
+            @RequestBody TicketRequestDto ticketRequestDto
     ) throws IOException {
         TicketResponseDto ticketResponseDto = ticketService.addTicket(
                 userDetails,
-                reviewId,
-                ticketImage
+                ticketRequestDto
         );
 
         return ResponseEntity.ok().body(ticketResponseDto);
