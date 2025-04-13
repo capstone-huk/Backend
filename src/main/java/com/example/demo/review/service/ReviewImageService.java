@@ -32,6 +32,7 @@ public class ReviewImageService {
 
         return ReviewImageResponseDto.builder()
                 .reviewImages(urls)
+                .reviewId(reviewId)
                 .exhibitionId(review.getExhibition().getId())
                 .exhibitionTitle(review.getExhibition().getTitle())
                 .build();
