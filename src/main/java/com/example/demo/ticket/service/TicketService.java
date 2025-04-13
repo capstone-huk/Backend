@@ -50,6 +50,8 @@ public class TicketService {
                 .ticketImageUrl(ticketImageUrl)
                 .build();
 
+        ticketRepository.save(ticket);
+
         return TicketResponseDto.from(ticket);
     }
 }
