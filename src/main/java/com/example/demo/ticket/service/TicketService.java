@@ -36,9 +36,9 @@ public class TicketService {
     public TicketResponseDto addTicket(
             CustomUserDetails userDetails,
             Long reviewId,
-            MultipartFile ticketImage
+            String ticketImage
     ) throws IOException {
-        String ticketImageUrl = s3Service.saveFile(ticketImage);
+        String ticketImageUrl = ticketImage; //s3Service.saveFile(ticketImage);
 
         Review review = reviewRepository.findById(reviewId).orElseThrow(
                 () -> new NotFoundException(ExceptionCode.NOT_FOUND_REVIEW)
@@ -47,6 +47,7 @@ public class TicketService {
         Ticket ticket = Ticket.builder()
                 .user(userDetails.getUser())
                 .review(review)
+                .ticketImageUrl(ticketImageUrl)
                 .build();
 
         return TicketResponseDto.from(ticket);

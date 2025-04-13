@@ -34,7 +34,7 @@ public class TicketController {
     public ResponseEntity<TicketResponseDto> ticketAdd(
             @AuthenticationPrincipal CustomUserDetails userDetails,
             @RequestParam Long reviewId,
-            @RequestParam MultipartFile ticketImage
+            @RequestParam String ticketImage
     ) throws IOException {
         TicketResponseDto ticketResponseDto = ticketService.addTicket(
                 userDetails,
