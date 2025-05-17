@@ -27,9 +27,8 @@ public class Review extends BaseTimeEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "exhibition_id", nullable = false)
-    private Exhibition exhibition;
+    @Column(name = "exhibition_id", nullable = false)
+    private Long exhibitionId;
 
     @Column(nullable = true)
     private LocalDate date;
@@ -40,4 +39,14 @@ public class Review extends BaseTimeEntity {
     public void setBody(String body) {
         this.body = body;
     }
+
+    @Builder
+    public Review(Long id, User user, Long exhibitionId, LocalDate date, String body) {
+        this.id = id;
+        this.user = user;
+        this.exhibitionId = exhibitionId;
+        this.date = date;
+        this.body = body;
+    }
+
 }
