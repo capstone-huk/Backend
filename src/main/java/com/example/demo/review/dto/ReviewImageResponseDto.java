@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewImageResponseDto {
     private Long exhibitionId;
-    private String exhibitionTitle;
     private Long reviewId;
     private List<String> reviewImages;
 }

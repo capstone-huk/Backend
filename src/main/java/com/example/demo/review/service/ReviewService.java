@@ -43,8 +43,7 @@ public class ReviewService {
                     List<String> urls = reviewImageRepository.findReviewImageUrlByReview(review);
                     return ReviewListResponseDto.builder()
                             .reviewId(review.getId())
-                            .exhibitionId(review.getExhibition().getId())
-                            .title(review.getExhibition().getTitle())
+                            .exhibitionId(review.getExhibitionId())  // 수정
                             .date(review.getDate())
                             .body(review.getBody())
                             .reviewImages(urls)
@@ -54,15 +53,13 @@ public class ReviewService {
     }
 
     public ReviewDetailResponseDto findReviewDetail(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId).orElseThrow(
-                () -> new NotFoundException(ExceptionCode.NOT_FOUND_REVIEW)
-        );
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new NotFoundException(ExceptionCode.NOT_FOUND_REVIEW));
 
         List<String> urls = reviewImageRepository.findReviewImageUrlByReview(review);
 
         return ReviewDetailResponseDto.builder()
-                .exhibitionId(review.getExhibition().getId())
-                .title(review.getExhibition().getTitle())
+                .exhibitionId(review.getExhibitionId())  // 수정
                 .date(review.getDate())
                 .body(review.getBody())
                 .reviewImages(urls)
@@ -73,12 +70,9 @@ public class ReviewService {
     public ReviewResponseDto addReview(CustomUserDetails userDetails, ReviewRequestDto requestDto) throws IOException {
         User user = userDetails.getUser();
 
-        Exhibition exhibition = exhibitionRepository.findById(requestDto.getExhibitionId())
-                .orElseThrow(() -> new NotFoundException(ExceptionCode.NOT_FOUND_EXHIBITION));
-
         Review review = Review.builder()
                 .user(user)
-                .exhibition(exhibition)
+                .exhibitionId(requestDto.getExhibitionId())
                 .date(requestDto.getDate())
                 .body(requestDto.getBody())
                 .build();

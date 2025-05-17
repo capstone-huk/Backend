@@ -10,9 +10,7 @@ import java.util.List;
 @Builder
 public class ReviewDetailResponseDto {
     private Long exhibitionId;
-    private String title;
     private LocalDate date;
     private String body;
     private List<String> reviewImages;
-
 }
