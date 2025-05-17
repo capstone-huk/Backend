@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Table(name = "review")
 public class Review extends BaseTimeEntity {
