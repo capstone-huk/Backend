@@ -12,6 +12,9 @@ import java.util.List;
 public class ReviewRequestDto {
     private String exhibitionId;
     private String exhitibionTitle;
+    private String exhibitionImageURL;
+    private String place;
+    private String during;
     private String title;
     private LocalDate date;
     private String body;

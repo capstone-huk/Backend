@@ -81,6 +81,9 @@ public class ReviewService {
                 .user(user)
                 .exhibitionSeq(requestDto.getExhibitionId())
                 .exhibitionTitle(requestDto.getExhitibionTitle())
+                .place(requestDto.getPlace())
+                .during(requestDto.getDuring())
+                .exhibitionImageURL(requestDto.getExhibitionImageURL())
                 .date(requestDto.getDate())
                 .body(requestDto.getBody())
                 .build();
