@@ -18,6 +18,7 @@ import com.example.demo.exhibition.repository.ExhibitionRepository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -74,39 +75,52 @@ public class ReviewService {
     }
 
     @Transactional
-    public ReviewResponseDto addReview(CustomUserDetails userDetails, ReviewRequestDto requestDto) throws IOException {
+    public ReviewResponseDto addReview(
+            CustomUserDetails userDetails,
+            String exhibitionId,
+            String exhibitionTitle,
+            String exhibitionImageURL,
+            String place,
+            String during,
+            String title,
+            LocalDate date,
+            String body,
+            List<MultipartFile> reviewImages
+    ) throws IOException {
+
         User user = userDetails.getUser();
 
         Review review = Review.builder()
                 .user(user)
-                .exhibitionSeq(requestDto.getExhibitionId())
-                .exhibitionTitle(requestDto.getExhitibionTitle())
-                .place(requestDto.getPlace())
-                .during(requestDto.getDuring())
-                .exhibitionImageURL(requestDto.getExhibitionImageURL())
-                .date(requestDto.getDate())
-                .body(requestDto.getBody())
+                .exhibitionSeq(exhibitionId)
+                .exhibitionTitle(exhibitionTitle)
+                .place(place)
+                .during(during)
+                .exhibitionImageURL(exhibitionImageURL)
+                .date(date)
+                .body(body)
                 .build();
         reviewRepository.save(review);
 
-        List<ReviewImage> reviewImages = new ArrayList<>();
-        if (requestDto.getReviewImages() != null) {
-            for (MultipartFile image : requestDto.getReviewImages()) {
+        List<ReviewImage> reviewImageEntities = new ArrayList<>();
+        if (reviewImages != null) {
+            for (MultipartFile image : reviewImages) {
                 String imageUrl = s3Service.saveFile(image); // S3에 저장 후 URL 반환
 
                 ReviewImage reviewImage = ReviewImage.builder()
                         .review(review)
                         .imageUrl(imageUrl)
                         .build();
-                reviewImages.add(reviewImage);
+                reviewImageEntities.add(reviewImage);
             }
-            reviewImageRepository.saveAll(reviewImages);
+            reviewImageRepository.saveAll(reviewImageEntities);
         }
 
         return ReviewResponseDto.builder()
                 .reviewId(review.getId())
                 .build();
     }
+
 
     @Transactional
     public ReviewResponseDto updateReview(CustomUserDetails userDetails, Long reviewId, ReviewUpdateRequestDto requestDto) throws IOException {

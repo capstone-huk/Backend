@@ -6,6 +6,7 @@ import com.example.demo.review.service.ReviewService;
 import com.example.demo.user.entity.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,10 +45,20 @@ public class ReviewController {
 
     // 전시 리뷰 등록
     @PostMapping(path = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ReviewResponseDto> addReview(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestPart ReviewRequestDto requestDto) throws IOException {
+    public ResponseEntity<ReviewResponseDto> addReview(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @RequestPart("exhibitionId") String exhibitionId,
+            @RequestPart("exhibitionTitle") String exhibitionTitle,
+            @RequestPart("exhibitionImageURL") String exhibitionImageURL,
+            @RequestPart("place") String place,
+            @RequestPart("during") String during,
+            @RequestPart("title") String title,
+            @RequestPart("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestPart("body") String body,
+            @RequestPart(value = "reviewImages", required = false) List<MultipartFile> reviewImages
+    ) throws IOException {
 
-        ReviewResponseDto responseDto = reviewService.addReview(userDetails, requestDto);
-
+        ReviewResponseDto responseDto = reviewService.addReview(userDetails, exhibitionId, exhibitionTitle, exhibitionImageURL, place, during, title, date, body, reviewImages);
         return ResponseEntity.ok(responseDto);
     }
 
