@@ -47,20 +47,23 @@ public class ReviewController {
     @PostMapping(path = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ReviewResponseDto> addReview(
             @AuthenticationPrincipal CustomUserDetails userDetails,
-            @RequestPart("exhibitionId") String exhibitionId,
-            @RequestPart("exhibitionTitle") String exhibitionTitle,
-            @RequestPart("exhibitionImageURL") String exhibitionImageURL,
-            @RequestPart("place") String place,
-            @RequestPart("during") String during,
-            @RequestPart("title") String title,
-            @RequestPart("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-            @RequestPart("body") String body,
+            @RequestParam("exhibitionId") String exhibitionId,
+            @RequestParam("exhibitionTitle") String exhibitionTitle,
+            @RequestParam("exhibitionImageURL") String exhibitionImageURL,
+            @RequestParam("place") String place,
+            @RequestParam("during") String during,
+            @RequestParam("title") String title,
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestParam("body") String body,
             @RequestPart(value = "reviewImages", required = false) List<MultipartFile> reviewImages
     ) throws IOException {
-
-        ReviewResponseDto responseDto = reviewService.addReview(userDetails, exhibitionId, exhibitionTitle, exhibitionImageURL, place, during, title, date, body, reviewImages);
+        ReviewResponseDto responseDto = reviewService.addReview(
+                userDetails, exhibitionId, exhibitionTitle, exhibitionImageURL,
+                place, during, title, date, body, reviewImages
+        );
         return ResponseEntity.ok(responseDto);
     }
+
 
     // 전시 리뷰 수정
     @PutMapping(path = "/{reviewId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
