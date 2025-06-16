@@ -27,7 +27,7 @@ public class Review extends BaseTimeEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "exhibition_id", nullable = true)
     private Exhibition exhibition;
 
