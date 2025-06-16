@@ -28,8 +28,7 @@ public class TicketService {
     private final ReviewRepository reviewRepository;
 
     public TicketListResponseDto findTicketList(CustomUserDetails userDetails) {
-        List<Ticket> tickets = ticketRepository.findByUser(userDetails.getUser());
-
+        List<Ticket> tickets = ticketRepository.findByUserOrderByCreatedAtDesc(userDetails.getUser());
         return TicketListResponseDto.from(tickets);
     }
 
