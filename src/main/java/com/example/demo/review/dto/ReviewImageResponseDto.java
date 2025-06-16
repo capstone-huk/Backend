@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReviewImageResponseDto {
-    private String exhibitionId;
+    private String exhibitionSeq;
     private String exhibitionTitle;
     private Long reviewId;
     private List<String> reviewImages;
