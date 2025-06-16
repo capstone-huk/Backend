@@ -24,8 +24,7 @@ public class TicketResponseDto {
         return TicketResponseDto.builder()
                 .ticketId(ticket.getId())
                 .reviewId(ticket.getReview().getId())
-                .exhibitionId(ticket.getReview().getExhibition().getId())
-                .exhibitionTitle(ticket.getReview().getExhibition().getTitle())
+                .exhibitionId(ticket.getReview().getExhibitionId())
                 .date(ticket.getReview().getDate())
                 .ticketImageUrl(ticket.getTicketImageUrl())
                 .build();
