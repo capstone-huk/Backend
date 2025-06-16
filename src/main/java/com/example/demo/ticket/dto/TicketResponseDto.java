@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class TicketResponseDto {
     private Long ticketId;
     private Long reviewId;
-    private Long exhibitionId;
+    private String exhibitionId;
     private String exhibitionTitle;
     private LocalDate date;
     private String ticketImageUrl;
@@ -24,7 +24,7 @@ public class TicketResponseDto {
         return TicketResponseDto.builder()
                 .ticketId(ticket.getId())
                 .reviewId(ticket.getReview().getId())
-                .exhibitionId(ticket.getReview().getExhibitionId())
+                .exhibitionId(ticket.getReview().getExhibitionSeq())
                 .date(ticket.getReview().getDate())
                 .ticketImageUrl(ticket.getTicketImageUrl())
                 .build();

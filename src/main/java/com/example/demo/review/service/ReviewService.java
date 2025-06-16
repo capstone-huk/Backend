@@ -36,7 +36,7 @@ public class ReviewService {
     public List<ReviewListResponseDto> getReviewList(CustomUserDetails userDetails) {
 
         User user = userDetails.getUser();
-        List<Review> reviews = reviewRepository.findByUserId(user);
+        List<Review> reviews = reviewRepository.findByUserId(user.getId());
 
         return reviews.stream()
                 .map(review -> {
