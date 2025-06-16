@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ReviewRequestDto {
     private String exhibitionId;
-    private String exhitibionTitle;
+    private String exhibitionTitle;
     private String exhibitionImageURL;
     private String place;
     private String during;
