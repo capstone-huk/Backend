@@ -28,8 +28,23 @@ public class Review extends BaseTimeEntity {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "exhibition_id", nullable = false)
+    @JoinColumn(name = "exhibition_id", nullable = true)
     private Exhibition exhibition;
+
+    @Column(nullable = true)
+    private String exhibitionSeq;
+
+    @Column(nullable = false)
+    private String exhibitionTitle;
+
+    @Column(nullable = false)
+    private String place;
+
+    @Column(nullable = false)
+    private String during;
+
+    @Column(nullable = false)
+    private String exhibitionImageURL;
 
     @Column(nullable = true)
     private LocalDate date;

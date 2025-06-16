@@ -33,7 +33,7 @@ public class ReviewImageService {
         return ReviewImageResponseDto.builder()
                 .reviewImages(urls)
                 .reviewId(reviewId)
-                .exhibitionId(review.getExhibition().getId())
+                .exhibitionId(review.getExhibitionSeq())
                 .exhibitionTitle(review.getExhibition().getTitle())
                 .build();
     }

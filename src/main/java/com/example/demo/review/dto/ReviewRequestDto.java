@@ -10,7 +10,8 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class ReviewRequestDto {
-    private Long exhibitionId;
+    private String exhibitionId;
+    private String exhitibionTitle;
     private String title;
     private LocalDate date;
     private String body;

@@ -14,8 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewListResponseDto {
     private Long reviewId;
-    private String title;
-    private Long exhibitionId;
+    private String exhibitionTitle;
+    private String exhibitionSeq;
+    private String exhibitionImageURL;
     private LocalDate date;
     private String body;
     private List<String> reviewImages;

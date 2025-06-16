@@ -9,8 +9,11 @@ import java.util.List;
 @Getter
 @Builder
 public class ReviewDetailResponseDto {
-    private Long exhibitionId;
-    private String title;
+    private String exhibitionSeq;
+    private String exhibitionTitle;
+    private String place;
+    private String during;
+    private String exhibitionImageURL;
     private LocalDate date;
     private String body;
     private List<String> reviewImages;
